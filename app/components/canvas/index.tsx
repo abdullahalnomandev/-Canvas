@@ -1,6 +1,11 @@
+"use client";
 import Image from "next/image";
+import { useState } from "react";
 
 const HomeCanvas = () => {
+  const [isOn, setIsOn] = useState(true);
+  const [speed,setSpeed] = useState(50);
+
   return (
     <div className="">
       <nav className="flex justify-between items-center">
@@ -11,7 +16,7 @@ const HomeCanvas = () => {
           <button className="text-white bg-gray-900 hover:bg-gray-800 py-2 px-3 rounded-md">
             Clear
           </button>
-          <button className="text-white bg-blue-600 hover:bg-gray-700 py-2 px-3 rounded-md">
+          <button className="text-white bg-blue-600 hover:bg-gray-700 py-2 px-3 rounded-md cursor-pointer">
             Save Preset{" "}
           </button>
         </div>
@@ -21,10 +26,13 @@ const HomeCanvas = () => {
         <div className=" flex items-center justify-center h-[calc(100vh-160px)]">
           <Image
             src="/fan.webp"
-            className="rounded-full"
+            className={`rounded-full ${isOn ? "rotate-container":""} img`}
             alt="canvas"
             width={270}
             height={270}
+            style={{
+              "--rotate-speed": isOn ? `${Math.max(0.5, 5 - (speed / 100) * 4.5)}s` : "0s",
+            } as React.CSSProperties}
           />
         </div>
         {/* Control  */}
@@ -33,21 +41,24 @@ const HomeCanvas = () => {
             <h1 className="text-white">Power</h1>
             <div className="relative inline-block w-11 h-5">
               <input
-                checked={true}
+                checked={isOn}
+                onChange={(e) => setIsOn(e.target.checked)}
                 id="switch-component"
                 type="checkbox"
-                className="peer appearance-none w-11 h-5 bg-slate-100 rounded-full checked:bg-slate-800
+                className="peer appearance-none w-11 h-5 bg-slate-800 rounded-full checked:bg-blue-500
                  cursor-pointer transition-colors duration-300"
               />
               <label className="absolute top-0 left-0 w-5 h-5 bg-white rounded-full border border-slate-300 shadow-sm transition-transform duration-300 peer-checked:translate-x-6 peer-checked:border-slate-800 cursor-pointer"></label>
             </div>
           </div>
             {/* RANGe  */}
+
            <div className="flex items-center justify-between py-4">
             <h1 className="text-white">Speed</h1>
-            <p className="text-white">20%</p>
+            <p className="text-white">{speed}%</p>
            </div>
-          <input type="range" min={0} height={3} max="100" value="100" className="range w-full! range-secondary" />
+          <input type="range"   onChange={(e) => setSpeed(Number(e.target.value))}
+ min={0} height={3} max="100" value={speed} className="range w-full! range-secondary cursor-pointer" />
 
         </div>
       </div>
