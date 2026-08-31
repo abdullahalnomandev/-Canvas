@@ -12,5 +12,16 @@
   --font-mono: var(--font-geist-mono);
 }
 
+.rotate-container {
+  animation: rotate360 var(--rotate-speed) linear infinite;
+}
 
+@keyframes rotate360 {
+  from {
+    transform: rotate(0deg);
+  }
 
+  to {
+    transform: rotate(360deg);
+  }
+}
