@@ -23,8 +23,8 @@ const HomeCanvas = () => {
             src="/fan.webp"
             className="rounded-full"
             alt="canvas"
-            width={300}
-            height={300}
+            width={270}
+            height={270}
           />
         </div>
         {/* Control  */}
@@ -47,7 +47,7 @@ const HomeCanvas = () => {
             <h1 className="text-white">Speed</h1>
             <p className="text-white">20%</p>
            </div>
-          <input type="range" min={0} height={3} max="100" value="100" className="range !w-full range-secondary" />
+          <input type="range" min={0} height={3} max="100" value="100" className="range w-full! range-secondary" />
 
         </div>
       </div>
